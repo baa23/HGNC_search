@@ -1,0 +1,82 @@
+# File for project metadata and project configuration
+
+[project]
+
+name = "HGNC_search"
+version = "0.0.1"
+description = "Tool that allows searching for HGNC data using gene symbol or HGNC ID"
+authors = [{name = "Becky Alsop", email = "becky.alsop@postgrad.manchester.ac.uk"}]
+readme = "README.md"
+
+# Keywords to help people find your package
+keywords = [
+    "bioinformatics", "HGNC"
+]
+
+# Minimum Python version required to run this package
+requires-python = ">=3.12.8"
+
+# Classifiers help categorise your package on PyPI
+# These are mainly for discoverability and filtering
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    # NOTE: This should ideally match requires-python
+    "Programming Language :: Python :: 3.12"
+]
+
+
+[tool.setuptools.dynamic]
+
+# Instead of listing dependencies here, they are read from requirements.txt
+dependencies = {file = ["requirements.txt"]}
+
+
+[tool.setuptools.packages.find]
+
+# Where setuptools should look for Python packages
+where = ["."]
+
+# Only include packages that match this pattern
+# (e.g. SeqKitSTP and any subpackages)
+include = ["HGNC_search*"]
+
+
+# ==========================================================
+# Package data (non-code assets required at runtime)
+# ==========================================================
+# The application depends on bundled static and template files
+# (HTML and CSS) required for correct operation of the Flask UI.
+#
+# These resources must be included in the installed package so that:
+#   - the application behaves identically across environments
+#   - deployment environments (including clinical/training systems)
+#     do not depend on external file paths or local filesystem layout
+#   - reproducibility is maintained across installations
+#
+# In this project, the application is distributed as a controlled,
+# self-contained system for healthcare training and interpretation.
+# Therefore, all runtime dependencies (code + templates + static assets)
+# are packaged together to avoid environment-dependent behaviour.
+#
+# NOTE:
+# Do not remove or externalise these resources unless deployment
+# infrastructure explicitly guarantees correct resolution.
+[tool.setuptools.package-data]
+HGNC_search = [
+    "templates/*",
+    "static/*"
+]
+
+[build-system]
+
+# Build-time dependencies required to package your project
+# setuptools = build backend
+# wheel = allows building .whl files
+
+requires = ["setuptools>=45", "wheel"]
+
+# The tool used to build your package
+build-backend = "setuptools.build_meta"

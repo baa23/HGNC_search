@@ -1,0 +1,20 @@
+# File to configure virtual environment for this project
+
+# Name of conda environment
+name: hgnc
+
+# Channels for relevant packages
+channels:
+  # Community-maintained packages (very up-to-date, widely used)
+  - conda-forge
+
+  # Bioinformatics-specific packages (built on top of conda-forge)
+  - bioconda
+
+# List of packages to install into the environment
+dependencies:
+  # Explicit version of python to use
+  - python==3.12.8
+
+  # Package installer, pip, used instead of conda where possible
+  - pip
