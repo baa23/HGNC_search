@@ -11,3 +11,5 @@ Users can enter either a gene symbol (e.g. CFTR) or a HGNC ID to search for rele
 
 The application uses a conda environment to specify the python version required (via environment.yml). Packages are installed and managed using pip (via requirements.txt). Project configuration and metadata are defined in pyproject.toml.
 
+
+
