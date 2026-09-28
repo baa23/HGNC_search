@@ -42,7 +42,7 @@ LOGGING_CONFIG = {
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
-            "level": "WARNING",
+            "level": "INFO",
             "formatter": "standard",
         },
 
