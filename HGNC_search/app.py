@@ -41,6 +41,8 @@ def initialise_app():
         """
         logger.debug("Rendering homepage")
         return render_template("index.html")
+    
+    
 
     return app
 
@@ -51,4 +53,4 @@ def initialise_app():
 app: Flask = initialise_app()
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

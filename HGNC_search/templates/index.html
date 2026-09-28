@@ -1,10 +1,40 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HGNC Search</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
-<body>
-<h1>HGNC Search</h1>
+<body style="background: rgb(255, 165, 0);">
+    <div>
+        <h1 style="text-align: left; color: navy;">
+            For easy searching of the "HUGO Gene Nomenclature Committee" gene data (www.genenames.org)
+        </h1>
+    </div>
+    <div class="container">
+        <h1 style="text-align:center; color:orange;">
+            HGNC Search
+        </h1>
+        
+            
+            <label for="gene" style="color: orange;">Gene or HGNC ID:</label>
+            <input type="text" name="gene" placeholder="" required>
+            <br><br>
+            
+            
+            
+            <button type="submit" class="btn btn-primary">Get HGNC data</button>
+        </form>
+        <br>
+        <p style="color: orange;">
+        {{ output_text_1 }}
+        </p>
+        <p style="color: orange;">
+        {{ output_text_2 }}
+        </p>
+    </div>
 </body>
-</html>
 </html>
