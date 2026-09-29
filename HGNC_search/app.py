@@ -42,7 +42,82 @@ def initialise_app():
         logger.debug("Rendering homepage")
         return render_template("index.html")
     
-    
+    @app.route("/search", methods=["POST"])
+    def search():
+        """
+        Perform gene searches.
+
+        Returns:
+            str: Rendered template containing results or error messages.
+        """
+
+        # Retrieve response from form
+        try:
+            gene = request.form.get("gene", "").strip().upper()
+            logger.debug(f"Received search request for gene: {gene}")
+        
+            # Check response is not empty
+            if not gene:
+                logger.warning("No gene provided in request")
+                return render_template(
+                    "index.html",
+                    output_text_1="ERROR: No gene provided",
+                )
+            
+            search_type = request.form.get("search_type", "")
+
+            # Check only numbers submitted if searching using HGNC: ID
+            if search_type == "hgnc_id":
+                if not gene.isdigit():
+                    logger.warning("Incorrect HGNC ID format submitted")
+                    return render_template(
+                    "index.html",
+                    output_text_1="ERROR: ID must only include digits",
+                )
+            
+            # Check gene symbol starts with a letter if searching using gene symbol
+            if search_type == "gene_symbol":
+                if not gene[0].isalpha():
+                    logger.warning("Incorrect gene symbol format submitted")
+                    return render_template(
+                        "index.html",
+                        output_text_1="ERROR: Human gene symbols must start with a letter",
+                    )
+
+            # Check only radio button search options submitted
+            if search_type not in ["gene_symbol", "hgnc_id"]:
+                logger.warning("Invalid search type")
+                return render_template(
+                    "index.html",
+                    output_text_1="ERROR: Invalid search type",
+                )
+
+            data = app.config["DATA"]
+            result = model.find_gene(gene, search_type, data)
+
+            if not result:
+                return render_template(
+                    "index.html",
+                    output_text_1= f"{gene} not found",
+                )
+            
+            output = []
+            for key, value in result.items():
+                s = key + "     >>     " + value
+                output.append(s)
+                output_final  = "\n".join(output)
+            
+            return render_template(
+                    "index.html",
+                    output_text_1= output_final,
+                )
+            
+        except Exception as e:
+            logger.exception("Unexpected error during search")
+            return render_template(
+                "index.html",
+                output_text_1=f"ERROR: {str(e)}",
+            )
 
     return app
 
