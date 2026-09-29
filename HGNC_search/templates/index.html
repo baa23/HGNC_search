@@ -10,30 +10,29 @@
 </head>
 <body style="background: rgb(255, 165, 0);">
     <div>
-        <h1 style="text-align: left; color: navy;">
+        <h1 style="text-align: center; color: navy;">
             For easy searching of the "HUGO Gene Nomenclature Committee" gene data (www.genenames.org)
         </h1>
     </div>
     <div class="container">
-        <h1 style="text-align:center; color:orange;">
-            HGNC Search
-        </h1>
-        
-            
+        <h1 style="text-align:center; color:orange;">HGNC Search</h1>
+        <form action="{{ url_for('search') }}" method="post">
             <label for="gene" style="color: orange;">Gene or HGNC ID:</label>
-            <input type="text" name="gene" placeholder="" required>
+            <input type="text" id="gene" name="gene" placeholder="" required>
             <br><br>
-            
-            
-            
-            <button type="submit" class="btn btn-primary">Get HGNC data</button>
-        </form>
+            <div class="search-options">
+                <input type="radio" id="gene_search" name="search_type" value="gene_symbol" checked>
+                <label for="gene_search" style="color: orange;">Gene Symbol</label>
+
+                <input type="radio" id="hgnc_search" name="search_type" value="hgnc_id">
+                <label for="hgnc_search" style="color: orange;">HGNC ID</label>
+            </div>
+            <br><br><br>
+                <button type="submit" class="btn btn-primary">Get HGNC data</button>
+            </form>
         <br>
-        <p style="color: orange;">
+        <p style="color: orange; white-space: pre-line;">
         {{ output_text_1 }}
-        </p>
-        <p style="color: orange;">
-        {{ output_text_2 }}
         </p>
     </div>
 </body>

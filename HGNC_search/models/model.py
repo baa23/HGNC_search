@@ -94,3 +94,30 @@ def parse_data(l):
         data.append(gene_info)
 
     return data
+
+def find_gene(lookup, search_type, database):
+    """
+    Searches for information on lookup in database.
+
+    Args:
+        lookup: dict
+            containing search term and search type
+        database: list
+            gene data dictionaries stored in a list
+    """
+    # Search dictionaries in list for matching entry
+    if search_type == "gene_symbol":
+        for item in database:
+            if item["symbol"] == lookup:
+                return item
+
+    if search_type == "hgnc_id":
+        search = "HGNC:" + lookup
+
+        for item in database:
+                if item["hgnc_id"] == search:
+                    return item
+
+    logger.info(f"No match found for gene: {lookup}")
+    return None
+
