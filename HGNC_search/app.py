@@ -84,14 +84,6 @@ def initialise_app():
                         output_text_1="ERROR: Human gene symbols must start with a letter",
                     )
 
-            # Check only radio button search options submitted
-            if search_type not in ["gene_symbol", "hgnc_id"]:
-                logger.warning("Invalid search type")
-                return render_template(
-                    "index.html",
-                    output_text_1="ERROR: Invalid search type",
-                )
-
             data = app.config["DATA"]
             result = model.find_gene(gene, search_type, data)
 
@@ -103,7 +95,7 @@ def initialise_app():
             
             output = []
             for key, value in result.items():
-                s = key + "     >>     " + value
+                s = key + (" " * 3) + ">>" + (" " * 3) + value
                 output.append(s)
                 output_final  = "\n".join(output)
             
@@ -120,8 +112,6 @@ def initialise_app():
             )
 
     return app
-
-
 
 
 # Import time app instance (for mounting to gunicorn or mod_wsgi)

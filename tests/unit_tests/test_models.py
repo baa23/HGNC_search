@@ -108,4 +108,72 @@ def test_data_only_header():
     with pytest.raises(FileEmptyError):
         model.parse_data(lines)
 
+# ------------------------------------------------------------------
+# find_gene tests
+# ------------------------------------------------------------------
+
+def test_find_gene_valid_gene():
+    """
+    Should return info for gene when symbol valid
+    """
+    gene = "CFTR"
+    search_type = "gene_symbol"
+    dataset = [
+        {"hgnc_id":"HGNC:5", "symbol":"A1BG"},
+        {"hgnc_id":"HGNC:1884", "symbol":"CFTR"}
+    ]
+
+    result = model.find_gene(gene, search_type, dataset)
+
+    assert result
+    assert result["hgnc_id"] == "HGNC:1884"
+    assert result ["symbol"] == "CFTR" 
+
+def test_find_gene_valid_hgnc_id():
+    """
+    Should return info for gene when HGNC ID valid
+    """
+    gene = "1884"
+    search_type = "hgnc_id"
+    dataset = [
+        {"hgnc_id":"HGNC:5", "symbol":"A1BG"},
+        {"hgnc_id":"HGNC:1884", "symbol":"CFTR"}
+    ]
+
+    result = model.find_gene(gene, search_type, dataset)
+
+    assert result
+    assert result["hgnc_id"] == "HGNC:1884"
+    assert result ["symbol"] == "CFTR" 
+
+def test_find_gene_not_found():
+    """
+    Should return None when gene symbol not found
+    """
+    gene = "becky"
+    search_type = "gene_symbol"
+    dataset = [
+        {"hgnc_id":"HGNC:5", "symbol":"A1BG"},
+        {"hgnc_id":"HGNC:1884", "symbol":"CFTR"}
+    ]
+
+    result = model.find_gene(gene, search_type, dataset)
+
+    assert not result
+
+def test_find_id_not_found():
+    """
+    Should return None when gene symbol not found
+    """
+    gene = "666"
+    search_type = "gene_symbol"
+    dataset = [
+        {"hgnc_id":"HGNC:5", "symbol":"A1BG"},
+        {"hgnc_id":"HGNC:1884", "symbol":"CFTR"}
+    ]
+
+    result = model.find_gene(gene, search_type, dataset)
+
+    assert not result
+
 

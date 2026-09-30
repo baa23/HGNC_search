@@ -33,7 +33,7 @@ h2 {
 }
 
 input[type="text"] {
-    width: 90%;
+    width: 10%;
     padding: 8px;
     margin: 10px 0;
     border: 1px solid #ccc;
@@ -47,7 +47,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%;
+    width: 20%;
 }
 
 button:hover {
