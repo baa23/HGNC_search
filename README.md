@@ -1,5 +1,7 @@
 # MCR Project Assignment
 
+[![.github/workflows/tests.yml](https://github.com/baa23/HGNC_search/actions/workflows/tests.yml/badge.svg?branch=readme_badges)](https://github.com/baa23/HGNC_search/actions/workflows/tests.yml)
+
 ## HGNC Search Application
 This project is a flask based web application which allows searching for gene information from HGNC. This has been developed as part of the Bioinformatics Foundational Unit requirements.
 
