@@ -27,6 +27,8 @@ classifiers = [
     "Programming Language :: Python :: 3.12"
 ]
 
+# Dependencies are read from requirements.txt
+dynamic = ["dependencies"]
 
 [tool.setuptools.dynamic]
 # Instead of listing dependencies here, they are read from requirements.txt
