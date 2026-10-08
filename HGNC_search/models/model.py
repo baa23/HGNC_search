@@ -30,7 +30,7 @@ def extract_file_data(filename):
 
     # Try to open the file
     try:
-        with open(filename) as f:
+        with open(filename, encoding="utf-8") as f:
             contents = csv.reader(f, delimiter='\t') 
             rows = list(contents) # Create a list containing contents of each row
     # If FileNotFoundError raised, update log and raise error

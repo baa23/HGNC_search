@@ -35,6 +35,12 @@ The application uses a conda environment to specify the python version required 
 
 Once the application repository has been cloned locally, the conda environment should be created and activated before installing the dependancies and project using pip. If an updated HGNC data set is required download this from the link above and replace the file in the data folder. This new file must be named "hgnc_complete_set.txt".
 
+## 0. Conda Install
+If conda is not already installed you can download it from here:
+https://www.anaconda.com/docs/getting-started/installation
+
+Choose the appropriate install for your OS and follow instructions to install miniconda3.
+
 ## 1. Create the Conda environment
 
 ```bash
