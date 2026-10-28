@@ -17,3 +17,9 @@ jobs:
       - name: Run pytest
         run: docker run --rm hgnc python -m pytest
 
+      - name: Run pytest
+        run: |
+          docker run --rm hgnc python -m pytest \
+          --cov=HGNC_search \
+          tests
+
