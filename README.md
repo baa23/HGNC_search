@@ -27,48 +27,13 @@ This data file is included within the application repository in the data folder 
 
 ## Application configuration
 
-The application uses a conda environment to specify the python version required (via environment.yml). Packages are installed and managed using pip (via requirements.txt). Project configuration and metadata are defined in pyproject.toml.
+The application uses a docker container (with python v3.12.8). Packages are installed and managed using pip (via requirements.txt). Project configuration and metadata are defined in pyproject.toml.
 
 ---
 
 # Installation
 
-Once the application repository has been cloned locally, the conda environment should be created and activated before installing the dependancies and project using pip. If an updated HGNC data set is required download this from the link above and replace the file in the data folder. This new file must be named "hgnc_complete_set.txt".
-
-## 0. Conda Install
-If conda is not already installed you can download it from here:
-https://www.anaconda.com/docs/getting-started/installation
-
-Choose the appropriate install for your OS and follow instructions to install miniconda3.
-
-## 1. Create the Conda environment
-
-```bash
-conda env create -f environment.yml
-```
-
-## 2. Activate the environment
-
-```bash
-conda activate hgnc
-```
-
-## 3. Install the project
-
-```bash
-pip install -e .
-```
-
-The editable installation allows changes made to the source code to be immediately reflected without reinstalling the package.
-
-## 4. Check dependancies
-
-```bash
-pip list
-```
-Check the packages in the list match those in requirments.txt and install anything that has been missed.
-
----
+First clone the repository locally and run the testing suite.
 
 # Testing
 
@@ -97,25 +62,28 @@ htmlcov/index.html
 ```
 
 ---
+# Docker
 
-# Launching the application
+This application is run within a docker container, this requires docker (docker engine) to be installed. Follow instructions below for docker install. If an updated HGNC data set is required download this from the link above and replace the file in the data folder. This new file must be named "hgnc_complete_set.txt".
 
-Start the Flask development server with:
+## 0. Docker Install
+If docker is not already installed you can download it from here:
+https://docs.docker.com/engine/install/
+
+Choose the appropriate install for your OS and follow instructions to install Docker Engine.
+
+## 1. Create the Docker Image
+Create the docker image that will be used for the application container. The docker image is created from the Dockerfile within the repository.
 
 ```bash
-python -m HGNC_search.app
+docker build -t hgnc .
 ```
 
-Alternatively, the application can be run directly from the source file:
+## 2. Launch the application within the docker container
+The docker container is created from the image which launches the flask application on port 8000.
 
 ```bash
-python HGNC_search/app.py
-```
-
-The application will be available at:
-
-```text
-http://127.0.0.1:5000/
+docker run -p 8000:8000 hgnc
 ```
 
 ---
@@ -126,10 +94,4 @@ Stop the Flask development server using:
 
 ```text
 Ctrl+C
-```
-
-Deactivate the Conda environment when finished:
-
-```bash
-conda deactivate
 ```
